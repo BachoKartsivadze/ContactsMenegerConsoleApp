@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ContactsMenegerConsoleApp
 {
     public class ManagerModel
     {
-        static List<CMContact> contacts = new List<CMContact>();
+        List<CMContact> data = new List<CMContact>();
+        const string filePath = "Data.json";
 
         public void AddContact()
         {
@@ -22,7 +24,7 @@ namespace ContactsMenegerConsoleApp
             string email = Console.ReadLine();
 
             CMContact newContact = new CMContact { Name = name, PhoneNumber = phone, Email = email };
-            contacts.Add(newContact);
+            data.Add(newContact);
 
             Console.WriteLine("Contact added successfully.");
         }
@@ -30,13 +32,13 @@ namespace ContactsMenegerConsoleApp
         public void ViewContacts()
         {
             Console.WriteLine("List of Contacts:");
-            if (contacts.Count == 0)
+            if (data.Count == 0)
             {
                 Console.WriteLine("No contacts found.");
                 return;
             }
 
-            foreach (var contact in contacts)
+            foreach (var contact in data)
             {
                 Console.WriteLine($"Name: {contact.Name}");
                 Console.WriteLine($"Phone: {contact.PhoneNumber}");
@@ -51,15 +53,31 @@ namespace ContactsMenegerConsoleApp
             Console.WriteLine("Enter the email of the contact to remove:");
             string emailToRemove = Console.ReadLine();
 
-            CMContact contactToRemove = contacts.Find(c => c.Email == emailToRemove);
+            CMContact contactToRemove = data.Find(c => c.Email == emailToRemove);
             if (contactToRemove == null)
             {
                 Console.WriteLine("No contact found with that email.");
                 return;
             }
 
-            contacts.Remove(contactToRemove);
+            data.Remove(contactToRemove);
             Console.WriteLine("Contact removed successfully.");
+        }
+
+
+        public void LoadContacts()
+        {
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                data = JsonSerializer.Deserialize<List<CMContact>>(json);
+            }
+        }
+
+        public void SaveContacts()
+        {
+            string json = JsonSerializer.Serialize(data);
+            File.WriteAllText(filePath, json);
         }
     }
 }

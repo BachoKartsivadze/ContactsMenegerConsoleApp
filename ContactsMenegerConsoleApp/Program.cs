@@ -1,11 +1,15 @@
 ﻿using ContactsMenegerConsoleApp;
 using System;
 using System.Collections.Generic;
-
+using System.Text.Json;
 
 
 ManagerModel managerModel = new ManagerModel();
+
+managerModel.LoadContacts();
+
 while (true)
+
 {
     Console.WriteLine("Simple Contacts Manager");
     Console.WriteLine("1. Add Contact");
@@ -37,5 +41,7 @@ while (true)
             Console.WriteLine("Invalid option. Please try again.");
             break;
     }
+
+    managerModel.SaveContacts();
 }
 
