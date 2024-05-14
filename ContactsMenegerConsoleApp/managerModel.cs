@@ -1,12 +1,16 @@
-﻿using System.Text.Json;
+﻿using System.Configuration;
+using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace ContactsMenegerConsoleApp
 {
     public class ManagerModel
     {
+        // data
         List<CMContact> data = new List<CMContact>();
-        const string filePath = "Data.json";
-
+        string filePath = "Data.json";
+        
+        // manager funqtionality
         public void AddContact()
         {
 
@@ -52,6 +56,7 @@ namespace ContactsMenegerConsoleApp
         }
 
 
+        // working on storage
         public void LoadContacts()
         {
             if (File.Exists(filePath))
@@ -68,6 +73,7 @@ namespace ContactsMenegerConsoleApp
         }
 
 
+        // validations
         private string addName() {
             Console.WriteLine("Enter Name:");
             string name = Console.ReadLine();
