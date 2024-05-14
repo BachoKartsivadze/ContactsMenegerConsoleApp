@@ -1,8 +1,4 @@
 ﻿using ContactsMenegerConsoleApp;
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-
 
 ManagerModel managerModel = new ManagerModel();
 
@@ -16,6 +12,7 @@ while (true)
     Console.WriteLine("1. Add Contact");
     Console.WriteLine("2. View List of Contacts");
     Console.WriteLine("3. Remove Contact by email");
+    Console.WriteLine();
 
     ConsoleKeyInfo keyNumber = Console.ReadKey();
     Console.WriteLine();
@@ -35,6 +32,7 @@ while (true)
             Console.WriteLine("Invalid option. Please try again.");
             break;
     }
+
 }
 
 managerModel.SaveContacts();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace ContactsMenegerConsoleApp
 {
@@ -15,7 +10,7 @@ namespace ContactsMenegerConsoleApp
         public void AddContact()
         {
 
-            CMContact newContact = new CMContact { Name = addName(), PhoneNumber = addNumber(), Email = addEmail()};
+            CMContact newContact = new CMContact { name = addName(), phoneNumber = addNumber(), email = addEmail()};
             data.Add(newContact);
 
             Console.WriteLine("Contact added successfully.");
@@ -32,9 +27,9 @@ namespace ContactsMenegerConsoleApp
 
             foreach (var contact in data)
             {
-                Console.WriteLine($"Name: {contact.Name}");
-                Console.WriteLine($"Phone: {contact.PhoneNumber}");
-                Console.WriteLine($"Email: {contact.Email}");
+                Console.WriteLine($"Name: {contact.name}");
+                Console.WriteLine($"Phone: {contact.phoneNumber}");
+                Console.WriteLine($"Email: {contact.email}");
                 Console.WriteLine($"..............");
                 Console.WriteLine();
             }
@@ -45,7 +40,7 @@ namespace ContactsMenegerConsoleApp
             Console.WriteLine("Enter the email of the contact to remove:");
             string emailToRemove = Console.ReadLine();
 
-            CMContact contactToRemove = data.Find(c => c.Email == emailToRemove);
+            CMContact contactToRemove = data.Find(c => c.email == emailToRemove);
             if (contactToRemove == null)
             {
                 Console.WriteLine("No contact found with that email.");
@@ -106,7 +101,7 @@ namespace ContactsMenegerConsoleApp
             while (true)
             {
                 if (email.Contains("@") && email.Contains(".") && email.Length > 8 && email.Length < 28) break;
-                Console.WriteLine("Invalid Email. Email must be at least 3 characters long");
+                Console.WriteLine("Invalid Email");
                 Console.WriteLine("Enter valid Email:");
                 email = Console.ReadLine();
             }
