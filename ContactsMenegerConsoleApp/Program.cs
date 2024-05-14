@@ -11,20 +11,14 @@ managerModel.LoadContacts();
 while (true)
 
 {
-    Console.WriteLine("Simple Contacts Manager");
+    Console.WriteLine("Hi I am Contacts Manager");
+    Console.WriteLine();
     Console.WriteLine("1. Add Contact");
     Console.WriteLine("2. View List of Contacts");
     Console.WriteLine("3. Remove Contact by email");
-    Console.WriteLine("Press Ctrl+M to go back to the main screen.");
 
     ConsoleKeyInfo keyNumber = Console.ReadKey();
     Console.WriteLine();
-
-    if (keyNumber.Modifiers == ConsoleModifiers.Control && keyNumber.Key == ConsoleKey.M)
-    {
-        Console.Clear();
-        continue;
-    }
 
     switch (keyNumber.KeyChar)
     {
@@ -41,7 +35,7 @@ while (true)
             Console.WriteLine("Invalid option. Please try again.");
             break;
     }
-
-    managerModel.SaveContacts();
 }
+
+managerModel.SaveContacts();
 

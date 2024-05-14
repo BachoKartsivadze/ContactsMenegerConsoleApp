@@ -14,16 +14,8 @@ namespace ContactsMenegerConsoleApp
 
         public void AddContact()
         {
-            Console.WriteLine("Enter Name:");
-            string name = Console.ReadLine();
 
-            Console.WriteLine("Enter Phone:");
-            string phone = Console.ReadLine();
-
-            Console.WriteLine("Enter eMail:");
-            string email = Console.ReadLine();
-
-            CMContact newContact = new CMContact { Name = name, PhoneNumber = phone, Email = email };
+            CMContact newContact = new CMContact { Name = addName(), PhoneNumber = addNumber(), Email = addEmail()};
             data.Add(newContact);
 
             Console.WriteLine("Contact added successfully.");
@@ -78,6 +70,47 @@ namespace ContactsMenegerConsoleApp
         {
             string json = JsonSerializer.Serialize(data);
             File.WriteAllText(filePath, json);
+        }
+
+
+        private string addName() {
+            Console.WriteLine("Enter Name:");
+            string name = Console.ReadLine();
+            while (name.Length < 3)
+            {
+                Console.WriteLine("Invalid name. Name must be at least 3 characters long");
+                Console.WriteLine("Enter valid name:");
+                name = Console.ReadLine();
+            }
+            return name;
+        }
+
+        private string addNumber()
+        {
+            Console.WriteLine("Enter Number:");
+            string number = Console.ReadLine();
+            while (true)
+            {
+                if (number.Length >= 9 && number.Length <= 13) break;
+                Console.WriteLine("Invalid number.");
+                Console.WriteLine("Enter valid Number:");
+                number = Console.ReadLine();
+            }
+            return number;
+        }
+
+        private string addEmail()
+        {
+            Console.WriteLine("Enter Email:");
+            string email = Console.ReadLine();
+            while (true)
+            {
+                if (email.Contains("@") && email.Contains(".") && email.Length > 8 && email.Length < 28) break;
+                Console.WriteLine("Invalid Email. Email must be at least 3 characters long");
+                Console.WriteLine("Enter valid Email:");
+                email = Console.ReadLine();
+            }
+            return email;
         }
     }
 }
