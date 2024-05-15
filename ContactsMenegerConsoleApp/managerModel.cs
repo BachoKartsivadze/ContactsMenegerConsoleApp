@@ -8,7 +8,7 @@ namespace ContactsMenegerConsoleApp
     {
         // data
         List<CMContact> data = new List<CMContact>();
-        string filePath = "Data.json";
+        string filePath = "Data2.json";
         
         // manager funqtionality
         public void AddContact()
